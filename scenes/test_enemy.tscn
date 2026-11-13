@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://ikw3nbccd2rn"]
+
+[ext_resource type="Texture2D" uid="uid://6flf3qroddyh" path="res://assets/Dragonfly Sprite Sheet.png" id="1_7jvd1"]
+[ext_resource type="Script" path="res://Scripts/test_enemy.gd" id="1_rd0jc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28vcm"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p3g0"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmegs"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot5bq"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqj88"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r24ow"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03aow"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amby5"]
+atlas = ExtResource("1_7jvd1")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qc73g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28vcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p3g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmegs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot5bq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqj88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r24ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03aow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amby5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4opgo"]
+size = Vector2(49, 40)
+
+[node name="testEnemy" type="CharacterBody2D" groups=["entity"]]
+script = ExtResource("1_rd0jc")
+
+[node name="bugAnim" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -38)
+scale = Vector2(2.40625, 2.33594)
+sprite_frames = SubResource("SpriteFrames_qc73g")
+animation = &"idle"
+frame_progress = 0.746667
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -34)
+shape = SubResource("RectangleShape2D_4opgo")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
